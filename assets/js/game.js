@@ -73,6 +73,25 @@ var fight = function(enemy){
     }   
 };
 
+var shop = function() {
+    // ask player what they'd like to do
+    var shopOptionPrompt = window.prompt(
+      "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice."
+    );
+    // use switch to carry out action
+    switch (shopOptionPrompt) {
+        case "REFILL":
+        case "refill":
+            playerInfo.refillHealth();
+            break;
+        case "UPGRADE":
+        case "upgrade":
+            playerInfo.upgradeAttack();
+            break;
+    }
+};
+
+
 // function to start a new game
 var startGame = function() {
     // reset player stats
@@ -90,6 +109,17 @@ var startGame = function() {
 
             // pass the pickedEnemy variable's value into the fight function, where it will assume the value of the enemy parameter
             fight(pickedEnemyObj);
+
+            // if we're not at the last enemy in the array
+            if (playerInfo.health > 0 && i < enemyInfo.length - 1) {
+                // ask if user wants to use the store before next round
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+              
+                // if yes, take them to the store() function
+                if (storeConfirm) {
+                  shop();
+                }
+            }
         } else {
             window.alert("You have lost your robot in battle! Game Over!")
             break;
