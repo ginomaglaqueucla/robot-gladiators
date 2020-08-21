@@ -75,6 +75,8 @@ var fight = function(enemy){
 
 // function to start a new game
 var startGame = function() {
+    // reset player stats
+    playerInfo.reset();
     for(var i = 0; i < enemyInfo.length; i++){
         if (playerInfo.health > 0) {
             // let user know what round they are in, remember that arrays start at 0 so needs to have 1 added to it
@@ -132,7 +134,30 @@ var playerInfo = {
     name: window.prompt("What is your robot's name?"),
     health: 100,
     attack: 10,
-    money: 10
+    money: 10,
+    reset: function(){
+        this.health = 100;
+        this.money= 10;
+        this.attack = 10;
+    },
+    refillHealth: function() {
+        if (this.money >= 7) {
+            window.alert("Refilling player's health by 20 for 7 dollars.");
+            this.health += 20;
+            this.money -= 7;
+        } else {
+            window.alert("You don't have enough money!");
+        }
+    },
+    upgradeAttack: function() {
+        if (this.money >= 7) {
+            window.alert("Upgrading player's attack by 6 for 7 dollars.");
+            this.attack += 6;
+            this.money -= 7;
+        } else {
+        window.alert("You don't have enough money!");
+        }
+    }
 };
 
 var enemyInfo = [
