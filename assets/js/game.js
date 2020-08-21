@@ -151,3 +151,5 @@ var enemyInfo = [
   ];
 // start the game when the page loads
 startGame();
+
+
